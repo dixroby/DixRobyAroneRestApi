@@ -1,7 +1,9 @@
 ﻿using DataAccess.Interface;
+using Dix.Business.Helper;
 using Dix.Business.Interface;
 using Dix.Dto;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Dix.Business.Logic
@@ -17,6 +19,12 @@ namespace Dix.Business.Logic
 
         public async Task<int> AddAsync(User entity)
         {
+            using (Rijndael myRijndael = Rijndael.Create())
+            {
+                string encrypted = HelperPassword.EncryptString(entity.Password, myRijndael.Key, myRijndael.IV);
+
+                entity.Password = encrypted;
+            }
             return await _userRepository.AddAsync(entity);
         }
 
