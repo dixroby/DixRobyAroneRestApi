@@ -9,6 +9,7 @@ namespace DataAccess.Registration
         public static void AddInfrastructure(this IServiceCollection services)
         {
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
         }
     }
 }

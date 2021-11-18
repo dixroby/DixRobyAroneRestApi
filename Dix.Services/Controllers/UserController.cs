@@ -10,46 +10,46 @@ namespace Dix.Services.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUserLogic _userLogic;
 
-        public UsuariosController(IUserLogic userLogic)
+        public UserController(IUserLogic userLogic)
         {
             _userLogic = userLogic;
         }
 
-        // GET: api/<UsuariosController>
         [HttpGet]
-        public async Task<IEnumerable<User>> Get()
+        [Route("[action]")]
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _userLogic.GetAllAsync();
         }
 
-        // GET api/<UsuariosController>/5
-        [HttpGet("{id}")]
-        public async Task<User> Get(int id)
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<User> GetByIdAsync(int id)
         {
             return await _userLogic.GetByIdAsync(id);
         }
 
-        // POST api/<UsuariosController>
         [HttpPost]
-        public async Task<int> Post([FromBody] User user)
+        [Route("[action]")]
+        public async Task<int> AddAsync([FromBody] User user)
         {
             return await _userLogic.AddAsync(user);
         }
 
-        // PUT api/<UsuariosController>
         [HttpPut]
-        public async Task<int> Put([FromBody] User user)
+        [Route("[action]")]
+        public async Task<int> UpdateAsync([FromBody] User user)
         {
             return await _userLogic.UpdateAsync(user);
         }
 
-        // DELETE api/<UsuariosController>/5
-        [HttpDelete("{id}")]
-        public async Task<int> Delete(int id)
+        [HttpDelete]
+        [Route("[action]")]
+        public async Task<int> DeleteAsync(int id)
         {
             return await _userLogic.DeleteAsync(id);
         }

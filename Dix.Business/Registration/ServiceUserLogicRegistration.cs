@@ -9,6 +9,7 @@ namespace Dix.Business.Registration
         public static void AddLogicInfrastructure(this IServiceCollection services)
         {
             services.AddTransient<IUserLogic, UserLogic>();
+            services.AddTransient<IProductLogic, ProductLogic>();
         }
     }
 }

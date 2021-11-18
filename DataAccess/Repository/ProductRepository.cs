@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using DataAccess.Interface;
 using Dix.Dto;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -9,29 +8,31 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public class UserRepository : IUserRepository
+    // servicio para realizar el crud de un producto
+    public class ProductRepository : IProductRepository
     {
         private readonly string _connectionString;
 
-        public UserRepository(IConfiguration configuration)
+        public ProductRepository(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public async Task<int> AddAsync(User entity)
+        public async Task<int> AddAsync(Product entity)
         {
-            const string sql = "Insert into Users (FirstName,LastName,UserName,Password) VALUES (@FirstName,@LastName,@UserName,@Password)";
+            // En esta parte se agrega un producto
+            const string sql = @"Insert into Products (Name,Price,Description) VALUES (@Name,@Price,@Description) ; SELECT SCOPE_IDENTITY()";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(sql, entity);
-                return result;
+                var result = await connection.QueryAsync<int>(sql, entity);
+                return result.Single(); 
             }
         }
 
         public async Task<int> DeleteAsync(int id)
         {
-            const string sql = "DELETE FROM Users WHERE Id = @Id";
+            const string sql = "DELETE FROM Products WHERE Id = @Id";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -40,31 +41,31 @@ namespace DataAccess.Repository
             }
         }
 
-        public async Task<IReadOnlyList<User>> GetAllAsync()
+        public async Task<IReadOnlyList<Product>> GetAllAsync()
         {
-            const string sql = "SELECT * FROM Users";
+            const string sql = "SELECT * FROM Products";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<User>(sql);
+                var result = await connection.QueryAsync<Product>(sql);
                 return result.ToList();
             }
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<Product> GetByIdAsync(int id)
         {
-            const string sql = "SELECT * FROM Users WHERE Id = @Id";
+            const string sql = "SELECT * FROM Products WHERE Id = @Id";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<User>(sql, new { Id = id });
+                var result = await connection.QuerySingleOrDefaultAsync<Product>(sql, new { Id = id });
                 return result;
             }
         }
 
-        public async Task<int> UpdateAsync(User entity)
+        public async Task<int> UpdateAsync(Product entity)
         {
-            const string sql = "UPDATE Users SET FirstName = @FirstName, LastName = @LastName, UserName = @UserName, Password = @Password WHERE Id = @Id";
+            const string sql = "UPDATE Products SET Name = @Name, Price = @Price, Description = @Description WHERE Id = @Id";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
