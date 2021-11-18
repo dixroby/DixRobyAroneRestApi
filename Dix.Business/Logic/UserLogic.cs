@@ -16,7 +16,7 @@ namespace Dix.Business.Logic
             _userRepository = userRepository;
         }
 
-        public async Task<int> AddAsync(User entity)
+        public async Task<int> AddAsync(Users entity)
         {
             if (!string.IsNullOrEmpty(entity.Password))
                 entity.Password = Cryptography.EncriptarAES(entity.Password);
@@ -28,19 +28,24 @@ namespace Dix.Business.Logic
             return await _userRepository.DeleteAsync(id);
         }
 
-        public async Task<IReadOnlyList<User>> GetAllAsync()
+        public async Task<IReadOnlyList<Users>> GetAllAsync()
         {
             return await _userRepository.GetAllAsync();
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<Users> GetByIdAsync(int id)
         {
             return await _userRepository.GetByIdAsync(id);
         }
 
-        public async Task<int> UpdateAsync(User entity)
+        public async Task<int> UpdateAsync(Users entity)
         {
             return await _userRepository.UpdateAsync(entity);
+        }
+
+        public async Task<IReadOnlyList<Products>> GetProductAllAsync(int UserId)
+        {
+            return await _userRepository.GetProductAllAsync(UserId);
         }
     }
 }

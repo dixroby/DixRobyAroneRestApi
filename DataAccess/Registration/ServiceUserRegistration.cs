@@ -10,6 +10,7 @@ namespace DataAccess.Registration
         {
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IBuyProductRepository, BuyProductRepository>();
         }
     }
 }

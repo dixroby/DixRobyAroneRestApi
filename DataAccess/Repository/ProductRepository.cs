@@ -18,7 +18,7 @@ namespace DataAccess.Repository
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public async Task<int> AddAsync(Product entity)
+        public async Task<int> AddAsync(Products entity)
         {
             // En esta parte se agrega un producto
             const string sql = @"Insert into Products (Name,Price,Description) VALUES (@Name,@Price,@Description) ; SELECT SCOPE_IDENTITY()";
@@ -41,29 +41,29 @@ namespace DataAccess.Repository
             }
         }
 
-        public async Task<IReadOnlyList<Product>> GetAllAsync()
+        public async Task<IReadOnlyList<Products>> GetAllAsync()
         {
             const string sql = "SELECT * FROM Products";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<Product>(sql);
+                var result = await connection.QueryAsync<Products>(sql);
                 return result.ToList();
             }
         }
 
-        public async Task<Product> GetByIdAsync(int id)
+        public async Task<Products> GetByIdAsync(int id)
         {
             const string sql = "SELECT * FROM Products WHERE Id = @Id";
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<Product>(sql, new { Id = id });
+                var result = await connection.QuerySingleOrDefaultAsync<Products>(sql, new { Id = id });
                 return result;
             }
         }
 
-        public async Task<int> UpdateAsync(Product entity)
+        public async Task<int> UpdateAsync(Products entity)
         {
             const string sql = "UPDATE Products SET Name = @Name, Price = @Price, Description = @Description WHERE Id = @Id";
             using (var connection = new SqlConnection(_connectionString))

@@ -6,10 +6,11 @@ namespace DataAccess.Interface
 {
     public interface IUserRepository
     {
-        Task<int> AddAsync(User entity);
+        Task<int> AddAsync(Users entity);
         Task<int> DeleteAsync(int id);
-        Task<IReadOnlyList<User>> GetAllAsync();
-        Task<User> GetByIdAsync(int id);
-        Task<int> UpdateAsync(User entity);
+        Task<IReadOnlyList<Users>> GetAllAsync();
+        Task<Users> GetByIdAsync(int id);
+        Task<int> UpdateAsync(Users entity);
+        Task<IReadOnlyList<Products>> GetProductAllAsync(int UserId);
     }
 }

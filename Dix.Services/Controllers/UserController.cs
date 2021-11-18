@@ -21,28 +21,35 @@ namespace Dix.Services.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<Users>> GetAllAsync()
         {
             return await _userLogic.GetAllAsync();
         }
 
         [HttpGet]
         [Route("[action]")]
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<IReadOnlyList<Products>> GetProductAllAsync(int usuarioId)
+        {
+            return await _userLogic.GetProductAllAsync(usuarioId);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<Users> GetByIdAsync(int id)
         {
             return await _userLogic.GetByIdAsync(id);
         }
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<int> AddAsync([FromBody] User user)
+        public async Task<int> AddAsync([FromBody] Users user)
         {
             return await _userLogic.AddAsync(user);
         }
 
         [HttpPut]
         [Route("[action]")]
-        public async Task<int> UpdateAsync([FromBody] User user)
+        public async Task<int> UpdateAsync([FromBody] Users user)
         {
             return await _userLogic.UpdateAsync(user);
         }

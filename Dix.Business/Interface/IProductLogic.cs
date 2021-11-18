@@ -6,10 +6,10 @@ namespace Dix.Business.Interface
 {
     public interface IProductLogic
     {
-        Task<int> AddAsync(Product entity);
+        Task<int> AddAsync(Products entity);
         Task<int> DeleteAsync(int id);
-        Task<IReadOnlyList<Product>> GetAllAsync();
-        Task<Product> GetByIdAsync(int id);
-        Task<int> UpdateAsync(Product entity);
+        Task<IReadOnlyList<Products>> GetAllAsync();
+        Task<Products> GetByIdAsync(int id);
+        Task<int> UpdateAsync(Products entity);
     }
 }

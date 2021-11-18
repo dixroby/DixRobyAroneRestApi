@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Dix.Dto
 {
@@ -7,6 +8,7 @@ namespace Dix.Dto
         public int Id { get; set; }
         public DateTime DateCreated { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
+        public Users User { get; set; }
+        public List<BuyProductDetails> BuyProductDetails { get; set; }
     }
 }

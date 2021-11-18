@@ -10,45 +10,45 @@ namespace Dix.Services.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class BuyProductController : ControllerBase
     {
-        private readonly IProductLogic _productLogic;
+        private readonly IBuyProductLogic _buyProductLogic;
 
-        public ProductController(IProductLogic productLogic)
+        public BuyProductController(IBuyProductLogic buyProductLogic)
         {
-            _productLogic = productLogic;
+            _buyProductLogic = buyProductLogic;
         }
 
         // GET: api/<ProductController>
         [HttpGet]
         [Route("[action]")]
-        public async Task<IEnumerable<Products>> GetAllAsync()
+        public async Task<IEnumerable<BuyProducts>> GetAllAsync()
         {
-            return await _productLogic.GetAllAsync();
+            return await _buyProductLogic.GetAllAsync();
         }
 
         // GET api/<ProductController>/5
         [HttpGet]
         [Route("[action]")]
-        public async Task<Products> GetByIdAsync(int id)
+        public async Task<BuyProducts> GetByIdAsync(int id)
         {
-            return await _productLogic.GetByIdAsync(id);
+            return await _buyProductLogic.GetByIdAsync(id);
         }
 
         // POST api/<ProductController>
         [HttpPost]
         [Route("[action]")]
-        public async Task<int> AddAsync([FromBody] Products user)
+        public async Task<int> AddAsync([FromBody] BuyProducts buyProducts)
         {
-            return await _productLogic.AddAsync(user);
+            return await _buyProductLogic.AddAsync(buyProducts);
         }
 
         // PUT api/<ProductController>
         [HttpPut]
         [Route("[action]")]
-        public async Task<int> UpdateAsync([FromBody] Products user)
+        public async Task<int> UpdateAsync([FromBody] BuyProducts buyProduct)
         {
-            return await _productLogic.UpdateAsync(user);
+            return await _buyProductLogic.UpdateAsync(buyProduct);
         }
 
         // DELETE api/<ProductController>/5
@@ -56,7 +56,7 @@ namespace Dix.Services.Controllers
         [Route("[action]")]
         public async Task<int> DeleteAsync(int id)
         {
-            return await _productLogic.DeleteAsync(id);
+            return await _buyProductLogic.DeleteAsync(id);
         }
     }
 }

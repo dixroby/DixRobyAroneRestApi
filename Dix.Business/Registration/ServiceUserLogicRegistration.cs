@@ -10,6 +10,7 @@ namespace Dix.Business.Registration
         {
             services.AddTransient<IUserLogic, UserLogic>();
             services.AddTransient<IProductLogic, ProductLogic>();
+            services.AddTransient<IBuyProductLogic, BuyProductLogic>();
         }
     }
 }
