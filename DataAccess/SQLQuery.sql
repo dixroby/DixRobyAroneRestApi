@@ -57,3 +57,27 @@ AS
 
         where d.id = @UsuarioId
 go
+
+-- registros
+INSERT INTO [dbo].[Users] ([FirstName] ,[LastName] ,[UserName] ,[Password])
+     VALUES ('pedro', 'Diaz', 'piter', 'AYER')
+GO
+
+SELECT * FROM [Products]
+INSERT INTO [dbo].[Products] ([Name] ,[Price] ,[Description])
+     VALUES ('Gaseosa',14.22,'Desde europa' )
+GO
+INSERT INTO [dbo].[Products] ([Name] ,[Price] ,[Description])
+     VALUES ('Oreo',14.22,'galletas premiun' )
+GO
+
+INSERT INTO [BuyProducts] ([DateCreated] ,[UserId])
+     VALUES (Getdate(),1)
+GO
+
+INSERT INTO  [BuyProductDetails] ([Quantity] ,[BuyProductId] ,[ProductId])
+     VALUES (5,1,1)
+GO
+INSERT INTO  [BuyProductDetails] ([Quantity] ,[BuyProductId] ,[ProductId])
+     VALUES (5,1,2)
+GO
